@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #fdfdfb;
+  --color-mist: #f1f4f0;
+  --color-jasmine: #1f7a5c;
+  --color-gold: #b08d3e;
+  --color-charcoal: #22272a;
+  --color-hairline: #e3e8e2;
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-jasmine) 16%, transparent);
+  color: var(--color-charcoal);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Green letterspaced micro-labels ---- */
+.micro-label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-jasmine);
+}
+
+/* ---- Underline-on-hover (background-size trick) ---- */
+.hover-underline {
+  background-image: linear-gradient(
+    to right,
+    var(--color-jasmine),
+    var(--color-jasmine)
+  );
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left calc(100% - 0.08em);
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  padding-bottom: 0.08em;
+}
+.hover-underline:hover,
+a:hover > .hover-underline,
+a:focus-visible > .hover-underline,
+.group:hover .hover-underline {
+  background-size: 100% 1px;
+}
+
+/* ---- Staggered fade-in on load ---- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Nearly invisible ad placeholder: faint hairline + tiny label ---- */
+.ad-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 6rem;
+  border: 1px dashed var(--color-hairline);
+}
+.ad-placeholder span {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-charcoal) 28%, transparent);
+}
+
+/* ---- Serene article typography ---- */
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.95;
+  color: color-mix(in srgb, var(--color-charcoal) 92%, transparent);
+}
+.article-body > *:first-child {
+  margin-top: 0;
+}
+.article-body p {
+  margin: 0 0 1.75em;
+}
+.article-body h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 1.3;
+  color: var(--color-charcoal);
+  margin: 2.4em 0 0.9em;
+}
+.article-body h2::before {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: 1.3rem;
+}
+.article-body h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  color: var(--color-charcoal);
+  margin: 2em 0 0.8em;
+}
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1.75em;
+  padding-left: 1.35em;
+}
+.article-body li {
+  margin-bottom: 0.55em;
+  padding-left: 0.35em;
+}
+.article-body li::marker {
+  color: var(--color-jasmine);
+}
+.article-body blockquote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.55rem;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--color-jasmine);
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+  margin: 2.6em 0;
+  padding: 2em 1.5em;
+}
+.article-body blockquote p {
+  margin: 0;
+}
+.article-body a {
+  color: var(--color-jasmine);
+  text-decoration: none;
+  background-image: linear-gradient(
+      to right,
+      var(--color-jasmine),
+      var(--color-jasmine)
+    ),
+    linear-gradient(to right, var(--color-hairline), var(--color-hairline));
+  background-size:
+    0% 1px,
+    100% 1px;
+  background-repeat: no-repeat;
+  background-position:
+    left calc(100% - 0.08em),
+    left calc(100% - 0.08em);
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.article-body a:hover {
+  background-size:
+    100% 1px,
+    100% 1px;
+}
+.article-body strong {
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+.article-body em {
+  font-style: italic;
+}
+.article-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.6em 0;
+}
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  margin: 2.6em auto;
+  width: 6rem;
+}
