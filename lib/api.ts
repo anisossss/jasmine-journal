@@ -1,4 +1,4 @@
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API = 'https://185.172.57.237.nip.io';
 const SITE = process.env.NEXT_PUBLIC_SITE_SLUG || "jasmine-journal";
 
 export interface Article {
